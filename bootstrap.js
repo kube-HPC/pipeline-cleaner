@@ -3,11 +3,12 @@ const Logger = require('@hkube/logger');
 const { main, logger } = configIt.load();
 const log = new Logger(main.serviceName, logger);
 const componentName = require('./common/consts/componentNames');
+const cleaner = require('./lib/cleaner/cleaner');
 
 const modules = [
     './lib/store/store-manager',
-    './lib/cleaner/api-server-client',
-    './lib/cleaner',
+    './lib/api-server-client',
+    './lib/cleaner/cleaner',
 ];
 
 class Bootstrap {
@@ -15,11 +16,11 @@ class Bootstrap {
         try {
             this._handleErrors();
             log.info('running application in ' + configIt.env() + ' environment', { component: componentName.MAIN });
-            await Promise.all(modules.map(m => m.init(main)));
-
+            await Promise.all(modules.map(m => require(m).init(main)));// eslint-disable-line global-require, import/no-dynamic-require
+            await cleaner.clean();
             return main;
         }
-        catch (error) {
+        catch (error) {// eslint-disable-line
             this._onInitFailed(error);
         }
     }
