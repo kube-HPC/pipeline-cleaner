@@ -27,7 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "@hkube/config": "^2.0.7",
-    "@hkube/etcd": "^4.0.16",
+    "@hkube/etcd": "^4.0.17",
     "@hkube/logger": "^1.0.12",
     "moment": "^2.22.2",
     "requestretry": "^2.0.0"
