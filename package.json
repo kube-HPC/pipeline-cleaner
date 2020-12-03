@@ -10,7 +10,6 @@
     "lint": "./node_modules/eslint/bin/eslint.js .",
     "test": "NODE_ENV=test ./node_modules/mocha/bin/_mocha tests --colors --recursive --exit",
     "test:cov": "NODE_ENV=test ./node_modules/nyc/bin/nyc.js --exclude=bootstrap.js --reporter=html --reporter=text --reporter=lcov mocha tests --colors --recursive --exit",
-    "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "start": "node app",
     "build": "./dockerfile/build.sh pipeline-cleaner"
   },
@@ -28,10 +27,10 @@
   "license": "MIT",
   "dependencies": {
     "@hkube/config": "^2.0.7",
-    "@hkube/etcd": "^5.0.3",
-    "@hkube/logger": "^1.0.15",
-    "moment": "^2.24.0",
-    "requestretry": "^4.0.0"
+    "@hkube/etcd": "^5.1.1",
+    "@hkube/logger": "^1.0.26",
+    "moment": "^2.29.1",
+    "requestretry": "^4.1.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
