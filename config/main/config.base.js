@@ -1,11 +1,21 @@
 const config = {};
 
-config.serviceName = 'pipeline-cleaner';
+const packageJson = require(process.cwd() + '/package.json');
+const formatter = require(process.cwd() + '/lib/utils/formatters');
 
-config.etcd = {
-    protocol: 'http',
-    host: process.env.ETCD_CLIENT_SERVICE_HOST || 'localhost',
-    port: process.env.ETCD_CLIENT_SERVICE_PORT || 4001
+config.serviceName = packageJson.name;
+
+config.db = {
+    provider: 'mongo',
+    mongo: {
+        auth: {
+            user: process.env.MONGODB_SERVICE_USER_NAME,
+            password: process.env.MONGODB_SERVICE_PASSWORD,
+        },
+        host: process.env.MONGODB_SERVICE_HOST || 'localhost',
+        port: formatter.parseInt(process.env.MONGODB_SERVICE_PORT, 27017),
+        dbName: process.env.MONGODB_DB_NAME || 'hkube',
+    }
 };
 
 config.apiServer = {
