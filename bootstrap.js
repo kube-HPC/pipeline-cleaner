@@ -6,15 +6,15 @@ const component = require('./lib/consts/componentNames').MAIN;
 const cleaner = require('./lib/cleaner/cleaner');
 
 const modules = [
-    './lib/store/store-manager',
-    './lib/api-server-client'
+    require('./lib/store/store-manager'),
+    require('./lib/api-server-client')
 ];
 class Bootstrap {
     async init() {
         try {
             this._handleErrors();
             log.info('running application in ' + configIt.env() + ' environment', { component });
-            await Promise.all(modules.map(m => require(m).init(main)));
+            await Promise.all(modules.map(m => m.init(main)));
             await cleaner.clean();
             return main;
         }

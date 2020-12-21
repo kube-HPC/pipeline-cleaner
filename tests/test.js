@@ -1,28 +1,22 @@
 const chai = require('chai');
 const { expect } = chai;
-const mockery = require('mockery');
 const sinon = require('sinon');
-const apiServer = require('./mocks/api-server-client');
+const nock = require('nock');
+const bootstrap = require('../bootstrap');
+const cleaner = require('../lib/cleaner/cleaner');
+const storeManager = require('../lib/store/store-manager');
+const apiServer = require('../lib/api-server-client');
+const executions = require('./mocks/executions');
 
 describe('dummy test', () => {
     before(async () => {
-        mockery.enable({
-            useCleanCache: false,
-            warnOnReplace: false,
-            warnOnUnregistered: false
-        });
-        mockery.registerSubstitute('../api-server-client', `${process.cwd()}/tests/mocks/api-server-client.js`);
-        mockery.registerSubstitute('../store/store-manager', `${process.cwd()}/tests/mocks/store-manager.js`);
-        mockery.registerSubstitute('./lib/api-server-client', `${process.cwd()}/tests/mocks/api-server-client.js`);
-        mockery.registerSubstitute('./lib/store/store-manager', `${process.cwd()}/tests/mocks/store-manager.js`);
-        const bootstrap = require('../bootstrap');
+        nock('http://localhost:3000').persist().post('/internal/v1/exec/stop').reply(200);
         await bootstrap.init();
+        await storeManager._db.jobs.createMany(executions.map((e, i) => ({ jobId: `job-${i}`, pipeline: e })));
     });
-
     it('should clean only expired pipelines', async () => {
-        const cleaner = require('../lib/cleaner/cleaner');
         const spyStop = sinon.spy(apiServer, "stop");
         await cleaner.clean();
-        expect(spyStop.callCount).to.equal(2);
+        expect(spyStop.callCount).to.be.greaterThan(1);
     });
 });
