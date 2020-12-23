@@ -1,4 +1,6 @@
-[
+const moment = require('moment');
+
+module.exports = [
     {
         "name": "test1",
         "nodes": [
@@ -79,7 +81,7 @@
             "result": "http://localhost:3003/webhook/result"
         },
         "priority": 3,
-        "startTime": 1532506623299
+        "startTime": Date.now()
     },
     {
         "name": "test4",
@@ -107,7 +109,7 @@
             "result": "http://localhost:3003/webhook/result"
         },
         "priority": 3,
-        "startTime": 1532506623299
+        "startTime": Date.now()
     },
     {
         "name": "expired pipeline1",
@@ -135,7 +137,7 @@
             "result": "http://localhost:3003/webhook/result"
         },
         "priority": 3,
-        "startTime": 1532506623299
+        "startTime": moment().subtract(60, 'seconds').toDate().getTime()
     },
     {
         "name": "expired pipeline2",
@@ -163,6 +165,6 @@
             "result": "http://localhost:3003/webhook/result"
         },
         "priority": 3,
-        "startTime": 1532506623299
+        "startTime": moment().subtract(60, 'seconds').toDate().getTime()
     }
 ]
