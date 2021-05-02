@@ -84,6 +84,7 @@ module.exports = [
     cpu: 1,
     mem: "6000Mi",
     minHotWorkers: 0,
+    created: Date.now() - 300000,
     options: {
       debug: false,
       pending: false,
@@ -114,6 +115,7 @@ module.exports = [
     algorithmImage: "hkube/algorithm-example",
     cpu: 2,
     mem: "100Mi",
+    created: Date.now() ,
     minHotWorkers: 0,
     options: {
       debug: false,
