@@ -17,7 +17,6 @@ module.exports = [
   {
     name: "gt-alg2",
     algorithmImage: "hkube/algorithm-gateway",
-    
     jobId: "job-1",
     mem: "50Mi",
     type: "Image",
@@ -115,7 +114,7 @@ module.exports = [
     algorithmImage: "hkube/algorithm-example",
     cpu: 2,
     mem: "100Mi",
-    created: Date.now() ,
+    created: Date.now(),
     minHotWorkers: 0,
     options: {
       debug: false,
