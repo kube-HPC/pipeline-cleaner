@@ -1,6 +1,6 @@
 {
   "name": "pipeline-cleaner",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "this service responsible for stopping expired pipelines",
   "main": "app.js",
   "directories": {
