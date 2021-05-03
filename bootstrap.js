@@ -4,7 +4,8 @@ const { main, logger } = configIt.load();
 const log = new Logger(main.serviceName, logger);
 const component = require('./lib/consts/componentNames').MAIN;
 const cleaner = require('./lib/cleaner/cleaner');
-
+const gatewayCleaner = require("./lib/cleaner/gatewayCleaner");
+const storeManager = require('./lib/store/store-manager');
 const modules = [
     require('./lib/store/store-manager'),
     require('./lib/api-server-client')
@@ -16,6 +17,8 @@ class Bootstrap {
             log.info('running application in ' + configIt.env() + ' environment', { component });
             await Promise.all(modules.map(m => m.init(main)));
             await cleaner.clean();
+            await gatewayCleaner.clean();
+            await storeManager.close()
             return main;
         }
         catch (error) {
