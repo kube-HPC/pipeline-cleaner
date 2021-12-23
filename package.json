@@ -29,7 +29,7 @@
   "dependencies": {
     "@hkube/config": "^2.0.7",
     "@hkube/etcd": "^5.0.38",
-    "@hkube/logger": "^1.0.29",
+    "@hkube/logger": "^2.0.1",
     "moment": "^2.24.0",
     "request": "^2.88.2",
     "requestretry": "^4.0.0"
