@@ -23,6 +23,12 @@ describe('dummy test', () => {
         const cleaner = require('../lib/cleaner/cleaner');
         const spyStop = sinon.spy(apiServer, "stop");
         await cleaner.clean();
-        expect(spyStop.callCount).to.equal(2);
+        expect(spyStop.callCount).to.equal(3);
+        expect(spyStop.args[0][0].jobId).to.equal('1');
+        expect(spyStop.args[0][0].reason).to.equal('pipeline active TTL expired');
+        expect(spyStop.args[1][0].jobId).to.equal('5');
+        expect(spyStop.args[1][0].reason).to.equal('pipeline expired');
+        expect(spyStop.args[2][0].jobId).to.equal('6');
+        expect(spyStop.args[2][0].reason).to.equal('pipeline expired');
     });
 });
