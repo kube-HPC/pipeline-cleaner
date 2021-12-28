@@ -1,9 +1,9 @@
 const config = {};
 config.transport = {
-    console: true,
-    redis: true
+    console: false,
+    fluentd: true,
+    logstash: false,
+    file: false
 };
-config.console = {
-    json: true
-};
+config.verbosityLevel = process.env.HKUBE_LOG_LEVEL || 2;
 module.exports = config;
