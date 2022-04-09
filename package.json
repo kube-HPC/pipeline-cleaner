@@ -30,7 +30,7 @@
     "@hkube/consts": "^1.0.35",
     "@hkube/db": "^1.0.34",
     "@hkube/logger": "^1.0.26",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "requestretry": "^4.1.2"
   },
   "devDependencies": {
